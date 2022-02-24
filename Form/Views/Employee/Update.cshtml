@@ -1,0 +1,133 @@
+﻿
+@model Form.Models.Employees
+
+
+@using Microsoft.AspNetCore.Mvc;
+@{
+    ViewData["Title"] = "Update";
+}
+ 
+<div class="container" style="margin-top:50px">
+    <div class="col-md-7 mx-auto my-auto bg-transparent">
+        <div class=" col-md-11 ">
+            <h1 class=" text-center">PERSONEL GÜNCELLE</h1>
+        </div>
+        <form method="post" asp-action="Update">
+
+            <div class="form-group row">
+                <label for="inputName" class="col-md-12 ">Adınız</label>
+                <div class="col-md-12">
+                    <input type="text" class="form-control" id="name" name="EmployeeName" placeholder="" required="">
+                    <span asp-validation-for="EmployeeName" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="inputSurname" class="col-md-12 col-form-label">Soyadınız</label>
+                <div class="col-md-12">
+                    <input type="text" class="form-control" name="EmployeeSurname" id="surname">
+                    <span asp-validation-for="EmployeeSurname" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="inputSurname" class="col-md-12 col-form-label">İşe Başlangıç Tarihi</label>
+                <div class="col-md-12">
+                    <input type="text" class="form-control" name="DateOfStartingJob" id="date">
+                    <span asp-validation-for="DateOfStartingJob" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <label for="inputGender" class=" col-md-12 col-form-label">Cinsiyet</label>
+                <div class="col-md-12">
+                    <select id="Cinsiyet" onchange="" class="form-select" aria-label="Default select example">
+                        <option value="" selected display>Seçiniz </option>
+                    </select>
+                    <span asp-validation-for="GenderId" class="text-danger"></span>
+                    <span class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+
+                <div class="form-group">
+
+                    <label for="inputCountry" class="col-md-3 col-form-label">Ülke</label>
+                    <select id="Ulke" onchange="Sehirler()" class="form-select" aria-label="Default select example">
+
+                        <option value="" selected display>Seçiniz</option>
+
+                    </select>
+                    <span asp-validation-for="CountryId" class="text-danger"></span>
+                    <span class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <label class="control-label"> Şehir:</label>
+
+                    <select id="Sehir" class="form-select" aria-label="Default select example">
+
+                        <option value="" selected display>Seçiniz</option>
+
+
+                    </select>
+                    <span asp-validation-for="CityId" class="text-danger"></span>
+                </div>
+
+            </div>
+            <div class="form-group row">
+                <label for="inputAdress" class="col-md-12 col-form-label">Adres</label>
+                <div class="col-md-12">
+                    <input type="text" class="form-control" name="EmployeeAdress" id="adress" style="height:100px">
+                    <span asp-validation-for="EmployeeAdress" class="text-danger"></span>
+                </div>
+            </div>
+
+
+            <div class="form-group row  col-md-12">
+                <button type="button"   class="btn btn-dark col-sm-2">Kaydet</button>
+                <a asp-action="List">Listele</a>
+            </div>
+
+
+
+        </form>
+    </div>
+</div>
+
+
+ 
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+<script>
+    $(document).ready(function (){
+        
+   });
+    function GetData() {
+        var id = getParameterByName("EmployeeId");
+
+        $.ajax({
+            type: "GET",
+            url: "/Employee/GetData" + id,
+            dataType: "json",
+            data:{ id: id },
+            success: function (data) {
+                $("#name").val(data.name);
+                $("#surname").val(data.surname);
+                $("#date").val(data.date);
+                
+                $('#Cinsiyet option:contains("' + data.cinsiyet + '")').attr('selected', 'selected');
+                $('#Ulke option:contains("' + data.dogum_Ulke + '")').attr('selected', 'selected');
+                Sehir($('#Ulke option:contains("' + data.dogum_Ulke + '")').val());
+                $("#adress").val(data.adress);
+
+            }
+
+        })
+    });
+</script>

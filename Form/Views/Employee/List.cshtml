@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Form.Models.Employees>
+@{
+    ViewData["Title"] = "Listeleme";
+
+}
+
+
+<!DOCTYPE html>
+
+<table id="tblListele">
+    <thead>
+        <tr>
+            <th>Id:</th>
+            <th>İsim:</th>
+            <th>Soyisim:</th>
+            <th>İşe Başlangıç Tarihi:</th>
+            <th>Adres:</th>
+            <th>Ülke:</th>
+            <th>Şehir:</th>
+            <th>Cinsiyet:</th>
+            <th> Güncelle</th>
+            <th>Sil</th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.EmployeeId</td>
+                <td>@item.EmployeeName</td>
+                <td>@item.EmployeeSurname</td>
+                <td>@item.DateOfStartingJob</td>
+                <td>@item.EmployeeAdress</td>
+                <td>@item.CountryId</td>
+                <td>@item.CityId</td>
+                <td>@item.GenderId</td>
+               
+                <td><a class="btn btn-info" asp-action="Update" asp-route-id="@item.EmployeeId">Güncelle</a></td>
+                <td><a class="btn btn-warning btnEmployeeSil" data-id="@item.EmployeeId"> Sil</a>  </td>
+
+
+
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/css/jquery.dataTables.min.css" integrity="sha512-1k7mWiTNoyx2XtmI96o+hdjP8nn0f3Z2N4oF/9ZZRgijyV4omsKOXEnqL1gKQNPy2MTSP9rIEWGcH/CInulptA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/css/dataTables.bootstrap4.min.css" integrity="sha512-PT0RvABaDhDQugEbpNMwgYBCnGCiTZMh9yOzUsJHDgl/dMhD9yjHAwoumnUk3JydV3QTcIkNDuN40CJxik5+WQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"  integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+  
+<script>
+
+    $(document).ready(function () {
+        $("#tblListele").DataTable();
+    });
+   
+
+
+    $(function () {
+        $("#tblListele").on("click", ".btnEmployeeSil", function () {
+            if (confirm("Çalışanı silmek istediğinizden emin misiniz?")) {
+                var id = $(this).data("id");
+                var btn = $(this);
+                $.ajax({
+                    type: "GET",
+                    url: "/Employee/Sil/" + id,
+                    success: function () {
+                        btn.parent().parent().remove();
+                    }
+                });
+            }
+
+        });
+
+    });
+
+</script>
