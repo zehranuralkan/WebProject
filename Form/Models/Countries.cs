@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace Form.Models
 {
-    
+    [Keyless]
     public class Countries
     {
-        [Key]
+        
         public int CountryId { get; set; }
  
         public string CountryName { get; set; }

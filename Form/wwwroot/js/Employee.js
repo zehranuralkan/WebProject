@@ -99,7 +99,7 @@ function Kaydet() {
         CountryId: CountryId,
         CityId: CityId,
         EmployeeAdress: EmployeeAdress
-
+         
     }
 
     $.ajax({

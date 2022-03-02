@@ -37,7 +37,7 @@
                 <td>@item.CityId</td>
                 <td>@item.GenderId</td>
                
-                <td><a class="btn btn-info" asp-action="Update" asp-route-id="@item.EmployeeId">Güncelle</a></td>
+                <td><a class="btn btn-info"  onclick="btnUpdateKayit(this.id)" id = "@item.EmployeeId">Güncelle</a></td>
                 <td><a class="btn btn-warning btnEmployeeSil" data-id="@item.EmployeeId"> Sil</a>  </td>
 
 
@@ -77,5 +77,9 @@
         });
 
     });
+
+    function btnUpdateKayit(id) {
+        window.location.href = "/Employee/Update?id=" + id;
+    };
 
 </script>
