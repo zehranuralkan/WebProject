@@ -24,11 +24,12 @@
           integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp"
           crossorigin="anonymous" />
     <script src="C:\Users\HP\source\repos\FormTest\FormTest\Scripts\jquery3.3.1.js"></script>
-    <script src="~/js/Employee.js"></script>
+
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="C:\Users\HP\source\repos\FormTest\FormTest\Scripts\jquery-1.12.1.min.js"></script>
+
 </head>
 
 <body>
@@ -57,25 +58,23 @@
                 <div class="form-group row">
                     <label for="inputSurname" class="col-md-12 col-form-label">İşe Başlangıç Tarihi</label>
                     <div class="col-md-12">
-                        <input type="text" class="form-control" name="DateOfStartingJob" id="date">
+                        <input type="date" class="form-control" name="DateOfStartingJob" id="date">
                     </div>
                 </div>
                 <div class="row form-group">
-
                     <label for="inputGender" class=" col-md-12 col-form-label">Cinsiyet</label>
                     <div class="col-md-12">
                         <select id="Cinsiyet" onchange="" class="form-select" aria-label="Default select example">
                         </select>
                         <span class="text-danger"></span>
                     </div>
-
                 </div>
-                <div class="form-group">
 
+                <div class="form-group">
 
                     <div class="form-group">
 
-                        <label for="inputCountry" class="col-md-3 col-form-label">Ülke</label>
+                        <label for="inputCountry" class="col-form-label">Ülke</label>
                         <select id="Ulke" onchange="Sehirler()" class="form-select" aria-label="Default select example">
 
                             <option value="" selected display>Seçiniz</option>
@@ -86,17 +85,34 @@
 
 
                     <div class="form-group">
-                        <label class="control-label"> Şehir:</label>
+                        <label class="control-label">Şehir:</label>
 
                         <select id="Sehir" class="form-select" aria-label="Default select example">
 
                             <option value="" selected display>Seçiniz</option>
 
-
                         </select>
                     </div>
- 
+
+
                 </div>
+
+                <div class="form-group">
+
+                    <div class="Media">
+                        <label class="control-label">Medya:</label>
+                        <div class="row" id="aa_imgFile">
+                            <img src="" id="a_imgFile" width="30" height="100" />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label"></label>
+                            <input type="file" name="iFormFile" id="imgFile" mediaId="" onchange="MedyaOlustur(this.id)" accept="image/*" />
+
+                        </div>
+                    </div>
+                </div>
+
+
                 <div class="form-group row">
                     <label for="inputAdress" class="col-md-12 col-form-label">Adres</label>
                     <div class="col-md-12">
@@ -104,23 +120,44 @@
                     </div>
                 </div>
 
-                
+
+                <div id="okulTekrarliRow" class="deneme">
+                    <div class="row ">
+                        <div class="col-md-3">
+                            <label class="control-label">Okul Tipi</label>
+                            <select id="Okul" class="form-select okul">
+                                <option value="">Seçiniz</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="control-label">Okul Adı</label>
+                            <input class="form-control" name="OkulAdi" id="OkulAdi" placeholder="Seçiniz.">
+                        </div>
+                        <div class="col-md-4">
+                            <label class="control-label">Mezuniyet Tarihi</label>
+                            <input type="date" class="form-control" name="MezuniyetTarihi" id="MezuniyetTarihi">
+                        </div>
+                        <div class="col-md-1">
+                            <label class="control-label"></label>
+                            <button type="button" onclick="OkulEkle()" style="height:35px;width:35px">+</button>
+                        </div>
+                        <input name="medyaid" id="medyaid " type="hidden" />
+                    </div>
+                </div>
+                <br />
+
                 <div class="form-group row  col-md-12">
                     <button type="submit" onclick="Kaydet()" class="btn btn-dark ">Kaydet</button>
                     <a asp-action="List">Listele</a>
                 </div>
-                
-             
-
             </form>
         </div>
     </div>
 
-    <footer class="text-center text-white bg-dark">
-    </footer>
 </body>
 </html>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 <script src="~/lib/jquery/dist/jquery.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="~/js/Employee.js"></script>

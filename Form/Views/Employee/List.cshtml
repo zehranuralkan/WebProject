@@ -1,63 +1,115 @@
-﻿@model IEnumerable<Form.Models.Employees>
+﻿
 @{
     ViewData["Title"] = "Listeleme";
-
 }
 
+<div class="container-fluid col-md-12">
+    <section class="content">
+        <div class="row">
+            <div class="col-12">
+                <div class="">
+                    <div class="card-header text-left">
+                        Employee List
+                    </div>
+                    <div class="">
+                        <div style="width: 100%;">
+                            <div class="table-responsive">
+                                <table id="tblListele" class="" style="">
+                                    <thead>
+                                        <tr>
+                                            <th>Id:</th>
+                                            <th>İsim:</th>
+                                            <th>Soyisim:</th>
+                                            <th>İşe Başlangıç Tarihi:</th>
+                                            <th>Adres:</th>
+                                            <th>Ülke:</th>
+                                            <th>Şehir:</th>
+                                            <th>Cinsiyet:</th>
+                                            <th>Eğitim Bilgileri:</th>
+                                            <th>Çalışan Fotoğraf:</th>
+                                            <th> Güncelle</th>
+                                            <th>Sil</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td>@item.Calisanim.EmployeeId</td>
+                                                <td>@item.Calisanim.EmployeeName</td>
+                                                <td>@item.Calisanim.EmployeeSurname</td>
+                                                <td>@item.Calisanim.DateOfStartingJob</td>
+                                                <td>@item.Calisanim.EmployeeAdress</td>
+                                                <td>@item.CalisanUlkesi.Tanim</td>
+                                                <td>@item.CalisanSehri.Tanim</td>
+                                                <td>@item.CalisanCinsiyet.GenderType</td>
 
-<!DOCTYPE html>
 
-<table id="tblListele">
-    <thead>
-        <tr>
-            <th>Id:</th>
-            <th>İsim:</th>
-            <th>Soyisim:</th>
-            <th>İşe Başlangıç Tarihi:</th>
-            <th>Adres:</th>
-            <th>Ülke:</th>
-            <th>Şehir:</th>
-            <th>Cinsiyet:</th>
-            <th> Güncelle</th>
-            <th>Sil</th>
-        </tr>
+                                                <td>
+                                                    <button type="button" class="btn btn-light btnEgitim" data-id="@item.Calisanim.EmployeeId" data-toggle="modal" data-target="#exampleModal">Tıklayınız.</button>
 
-    </thead>
+                                                </td>
+                                                <td><img src="@item.MedyaId.MedyaUrl" style="width:100px; height:100px"></td>
+                                                <td><a class="btn btn-info" onclick="btnUpdateKayit(this.id)" id="@item.Calisanim.EmployeeId">Güncelle</a></td>
+                                                <td><a class="btn btn-warning btnEmployeeSil" data-id="@item.Calisanim.EmployeeId"> Sil</a></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.EmployeeId</td>
-                <td>@item.EmployeeName</td>
-                <td>@item.EmployeeSurname</td>
-                <td>@item.DateOfStartingJob</td>
-                <td>@item.EmployeeAdress</td>
-                <td>@item.CountryId</td>
-                <td>@item.CityId</td>
-                <td>@item.GenderId</td>
-               
-                <td><a class="btn btn-info"  onclick="btnUpdateKayit(this.id)" id = "@item.EmployeeId">Güncelle</a></td>
-                <td><a class="btn btn-warning btnEmployeeSil" data-id="@item.EmployeeId"> Sil</a>  </td>
+</div>
 
 
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Eğitim Bilgileri</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="EgitimGetir">
 
-            </tr>
-        }
-    </tbody>
-</table>
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kapat</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/css/jquery.dataTables.min.css" integrity="sha512-1k7mWiTNoyx2XtmI96o+hdjP8nn0f3Z2N4oF/9ZZRgijyV4omsKOXEnqL1gKQNPy2MTSP9rIEWGcH/CInulptA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/css/dataTables.bootstrap4.min.css" integrity="sha512-PT0RvABaDhDQugEbpNMwgYBCnGCiTZMh9yOzUsJHDgl/dMhD9yjHAwoumnUk3JydV3QTcIkNDuN40CJxik5+WQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js"  integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
-  
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/css/dataTables.bootstrap4.min.css" integrity="sha512-PT0RvABaDhDQugEbpNMwgYBCnGCiTZMh9yOzUsJHDgl/dMhD9yjHAwoumnUk3JydV3QTcIkNDuN40CJxik5+WQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.21/js/jquery.dataTables.min.js" integrity="sha512-BkpSL20WETFylMrcirBahHfSnY++H2O1W+UnEEO4yNIl+jI2+zowyoGJpbtk6bx97fBXf++WJHSSK2MV4ghPcg==" crossorigin="anonymous" referrerpolicy="no-referrer" defer></script>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.0/css/responsive.bootstrap.css" />
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.0/js/dataTables.responsive.js" />
 <script>
 
     $(document).ready(function () {
-        $("#tblListele").DataTable();
+        $("#tblListele").DataTable({
+            "paging": true,
+            "responsive": true,
+            "dom": 'Bfrtip',
+            "buttons": [
+            ]
+        })
     });
-   
+
+
 
 
     $(function () {
@@ -78,8 +130,53 @@
 
     });
 
+
+
+    $(function EgitimGetir() {
+        $("#tblListele").on("click", ".btnEgitim", function () {
+            var id = $(this).data("id");
+
+            $.ajax({
+                type: "GET",
+                url: "/Employee/EgitimGetir/" + id,
+                async: false,
+                success: function (data) {
+                    console.log(data);
+                    var myDesign = " ";
+                    myDesign += "<tr><th> Mezuniyet Tarihi </th>";
+
+                    myDesign += "<th> Okul Adı </th></tr>";
+                    for (var i = 0; i < data.length; i++) {
+
+                        myDesign += "<tr><td>" + data[i].mezuniyetTarihi + "</td>";
+
+                        myDesign += "<td>" + data[i].okulAdi + "</td></tr>";
+                    }
+                    $("#EgitimGetir").html(myDesign);
+                }
+
+
+            });
+
+
+        });
+
+    });
+
     function btnUpdateKayit(id) {
         window.location.href = "/Employee/Update?id=" + id;
     };
+
+    function UlkeAdiGetir(id) {
+        var ad;
+        $.ajax({
+            type: "GET",
+            url: "/Employee/UlkeAdiGetir/" + id,
+            success: function (data) {
+                ad = data;
+            }
+        });
+        return ad;
+    }
 
 </script>

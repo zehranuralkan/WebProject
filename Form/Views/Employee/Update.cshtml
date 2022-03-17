@@ -40,7 +40,7 @@
     <div class="container" style="margin-top:50px">
         <div class="col-md-7 mx-auto my-auto bg-transparent">
             <div class=" col-md-11 ">
-                <h1 class=" text-center">PERSONEL KAYIT</h1>
+                <h1 class=" text-center">PERSONEL GÜNCELLEME</h1>
             </div>
             <form method="post">
 
@@ -60,58 +60,67 @@
                 <div class="form-group row">
                     <label for="inputSurname" class="col-md-12 col-form-label">İşe Başlangıç Tarihi</label>
                     <div class="col-md-12">
-                        <input type="text" class="form-control" name="DateOfStartingJob" id="date">
+                        <input type="date" class="form-control" name="DateOfStartingJob" id="date">
                     </div>
                 </div>
                 <div class="row form-group">
                     <label for="inputGender" class=" col-md-12 col-form-label">Cinsiyet</label>
                     <div class="col-md-12">
-                        <select id="Cinsiyet" asp-for="GenderId"  class="form-select" aria-label="Default select example">
+                        <select id="Cinsiyet" asp-for="GenderId" class="form-select" aria-label="Default select example">
                             <option value="" selected display>Seçiniz </option>
                         </select>
                         <span asp-validation-for="GenderId" class="text-danger"></span>
                         <span class="text-danger"></span>
                     </div>
                 </div>
+
                 <div class="form-group">
-
-
                     <div class="form-group">
-
                         <label for="inputCountry" class="col-md-3 col-form-label">Ülke</label>
-                        <select id="Ulke"  asp-for="CountryId" onchange="Sehirler()" class="form-select" aria-label="Default select example">
-                          
-
-                                <option value="" selected display>Seçiniz</option>
-
-                            </select>
-                            <span asp-validation-for="CountryId" class="text-danger"></span>
-</div>
-
+                        <select id="Ulke" asp-for="CountryId" onchange="Sehirler()" class="form-select" aria-label="Default select example">
+                            <option value="" selected display>Seçiniz</option>
+                        </select>
+                        <span asp-validation-for="CountryId" class="text-danger"></span>
+                    </div>
 
                     <div class="form-group">
                         <label class="control-label"> Şehir:</label>
-
                         <select id="Sehir" asp-for="CityId" class="form-select" aria-label="Default select example">
-
                             <option value="" selected display>Seçiniz</option>
-
-
                         </select>
                         <span asp-validation-for="CityId" class="text-danger"></span>
                     </div>
                 </div>
+
+                <div class="form-group">
+
+                    <div class="Media">
+                        <label class="control-label">Medya:</label>
+                        <div class="row" id="aa_imgFile">
+                            <img src="" id="a_imgFile" width="30" height="100" />
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label"></label>
+                            <input type="file" name="iFormFile" id="imgFile" mediaId="" onchange="MedyaOlustur(this.id)" accept="image/*" />
+
+                        </div>
+                    </div>
+                </div>
+
+
                 <div class="form-group row">
                     <label for="inputAdress" class="col-md-12 col-form-label">Adres</label>
                     <div class="col-md-12">
                         <input type="text" class="form-control" name="EmployeeAdress" id="adress" style="height:100px">
                     </div>
                 </div>
+                <div id="okulTekrarliRow" class="deneme">
 
-
+                </div>
+                <br />
                 <div class="form-group row  col-md-12">
-                    <input id="uptade" type="button" value="Güncelle" onclick="updateKayit()" class="btn btn-dark" /> 
-                </div> 
+                    <input id="uptade" type="button" value="Güncelle" onclick="updateKayit()" class="btn btn-dark" />
+                </div>
             </form>
         </div>
     </div>
